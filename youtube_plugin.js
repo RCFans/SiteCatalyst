@@ -1,7 +1,7 @@
 /*
- * Plugin: YouTube plugin SC14.9/15 v1.6
- * Created by Justina Chen [14/10/2013]
- */
+* Plugin: YouTube plugin SC14.9/15 v1.7
+* Created by Justina Chen [13/11/2013]
+*/
 var s_YTO = {};
 s_YTO.v = new Object;
 s_YTO.ya = s_YTisa() ? 2 : 0;
@@ -30,6 +30,11 @@ function s_YTp() {
             s_YTO.ya = 2;
         for (var t = 0; t < e.length; t++) {
             var n = s_YTgk(e[t].src), r = e[t].id;
+            if (ie) {
+                e[t].attachEvent("onLoad", s_YTp);
+            } else {
+                e[t].addEventListener("load", s_YTp, false);
+            }
             if (!r) {
                 r = "ytplayer";
             }
@@ -60,26 +65,20 @@ function s_YTp() {
                             return;
                         }
                     }
-                    if (window.addEventListener) {
-                        s_YTO.v[r].addEventListener("onStateChange", "s_YTisc", false);
-                    } else if (window.attachEvent) {
-                        window.attachEvent("onStateChange", "s_YTisc");
-                    }
+                    s_YTO.v[r].addEventListener("onStateChange", "s_YTisc", false);
                 }
             }
         }
     } catch (s) {
     }
-    s_YTO.ut = setTimeout("s_YTp()", 1e3);
 }
-
+ 
 function s_YTisc(e) {
-    console.log(e.data);
     s_YTO.v['media'].ys = e.data;
     s_YTO.v['media'].vg(e.target);
     s_YTO.v['media'].ve();
 }
-
+ 
 function s_YTisa() {
     return typeof window.YT == "object" && typeof YT.Player
 }
@@ -329,7 +328,8 @@ function s_YTv(e, t) {
                 window.attachEvent("onStateChange", "s_YTO.v." + e + ".fsc")
             }
         } else {
-            n.yt = 2;        }
+            n.yt = 2;
+        }
         return n
     } catch (u) {
         return null
