@@ -4,11 +4,14 @@ You can find many samples & demo codes here
 Use Youtube API to tracking video data. It supports:
 - iframe embeded video player
 - object embeded video player
-### Get start:
+
+### Get start
 1.Place youtube_plugin.js in your scode.js
+
 2.Embed YouTube iframe video on your web page
 ```html
 <iframe id="player" src="http://www.youtube.com/embed/videoid?enablejsapi=1"></iframe>
+```
 3.Enable s.Media
 ```javascript
 s.loadModule('Media');
@@ -23,3 +26,4 @@ s.Media.contextDataMapping = {
     "a.media.complete":"event76",
     "a.media.timePlayed":"event75"
 };
+```
